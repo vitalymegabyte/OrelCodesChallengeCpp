@@ -2,7 +2,10 @@
 //
 #include <iostream>
 #include <fstream>
+#include <chrono>
+#include <ctime>  
 using namespace std;
+using namespace chrono;
 #define ll long long
 int currentS;
 int currentL;
@@ -11,6 +14,7 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    auto start = system_clock::now();
     ifstream server;
     ifstream local;
     ofstream output;
@@ -45,6 +49,9 @@ int main()
     local.close();
     output.close();
     missing.close();
+    auto end = system_clock::now();
+    duration<double> span = end - start;
+    cout << "Total: " << span.count() << "s\n";
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
