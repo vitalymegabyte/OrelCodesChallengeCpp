@@ -14,44 +14,47 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    auto start = system_clock::now();
-    ifstream server;
-    ifstream local;
-    ofstream output;
-    ofstream missing;
-    server.open("input_server.txt");
-    local.open("input_local.txt");
-    output.open("output_result.txt");
-    missing.open("output_missing.txt");
-    server >> currentS;
-    local >> currentL;
-    while (currentL < currentS)
+    for (int i = 0; i < 1000; i++)
     {
-        output << currentL << ' ';
+        auto start = system_clock::now();
+        ifstream server;
+        ifstream local;
+        ofstream output;
+        ofstream missing;
+        server.open("input_server.txt");
+        local.open("input_local.txt");
+        output.open("output_result.txt");
+        missing.open("output_missing.txt");
+        server >> currentS;
         local >> currentL;
-    }
-    output << currentS << ' ';
-    if (currentL == currentS)
-        local >> currentL;
-    while (server >> currentS)
-    {
-        output << currentS << ' ';
-        if (currentL == currentS)
+        while (currentL < currentS)
         {
+            output << currentL << ' ';
             local >> currentL;
         }
-        else
+        output << currentS << ' ';
+        if (currentL == currentS)
+            local >> currentL;
+        while (server >> currentS)
         {
-            missing << currentS << ' ';
+            output << currentS << ' ';
+            if (currentL == currentS)
+            {
+                local >> currentL;
+            }
+            else
+            {
+                missing << currentS << ' ';
+            }
         }
+        server.close();
+        local.close();
+        output.close();
+        missing.close();
+        auto end = system_clock::now();
+        duration<double> span = end - start;
+        //cout << "Total: " << span.count() << "s\n";
     }
-    server.close();
-    local.close();
-    output.close();
-    missing.close();
-    auto end = system_clock::now();
-    duration<double> span = end - start;
-    cout << "Total: " << span.count() << "s\n";
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

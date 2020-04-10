@@ -1,4 +1,6 @@
 Debug/
-OrelCodesChallenge.vcxproj
-OrelCodesChallenge.vcxproj.filters
-OrelCodesChallenge.vcxproj.user
+Release/
+input_local.txt
+input_server.txt
+output_missing.txt
+output_result.txt
